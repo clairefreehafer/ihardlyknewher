@@ -22,19 +22,22 @@ export default class Page extends Component {
 
 	render () {
 		return (
-			<div id="photos">
-				{this.state.photos ? this.state.photos.map((photo, idx) => {
-					return (
-						<div key={photo.id}>
-						{console.log(photo)}
-							<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`} />
-						</div>
-					)
-				}) : null}
-				<div id="previous" style={{ display: this.state.prevDisplay }}>&larr; previous</div>
-				<div id="next">next &rarr;</div>
+			<div id="app">
+				<div id="photos">
+					{this.state.photos ? this.state.photos.map(photo => {
+						return (
+							<div key={photo.id} className="photo">
+								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
+							</div>
+						)
+					}) : null}
+				</div>
+				<div id="pagnation">
+					<div id="previous" style={{ display: this.state.prevDisplay }}>&larr; previous</div>
+					<div id="next">next &rarr;</div>
+				</div>
 			</div>
-		)
+		);
 	}
 }
 

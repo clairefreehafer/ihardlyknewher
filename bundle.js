@@ -9575,24 +9575,31 @@ var Page = function (_Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ id: 'photos' },
-				this.state.photos ? this.state.photos.map(function (photo, idx) {
-					return _react2.default.createElement(
-						'div',
-						{ key: photo.id },
-						console.log(photo),
-						_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_m.jpg' })
-					);
-				}) : null,
+				{ id: 'app' },
 				_react2.default.createElement(
 					'div',
-					{ id: 'previous', style: { display: this.state.prevDisplay } },
-					'\u2190 previous'
+					{ id: 'photos' },
+					this.state.photos ? this.state.photos.map(function (photo) {
+						return _react2.default.createElement(
+							'div',
+							{ key: photo.id, className: 'photo' },
+							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg' })
+						);
+					}) : null
 				),
 				_react2.default.createElement(
 					'div',
-					{ id: 'next' },
-					'next \u2192'
+					{ id: 'pagnation' },
+					_react2.default.createElement(
+						'div',
+						{ id: 'previous', style: { display: this.state.prevDisplay } },
+						'\u2190 previous'
+					),
+					_react2.default.createElement(
+						'div',
+						{ id: 'next' },
+						'next \u2192'
+					)
 				)
 			);
 		}
