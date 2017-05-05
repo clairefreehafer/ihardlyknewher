@@ -9568,9 +9568,17 @@ var Page = function (_Component) {
 		value: function componentDidMount() {
 			var _this2 = this;
 
-			if (this.state.page > 1) this.setState({ prevDisplay: 'block' });
 			(0, _utils.getPhotos)(this.state.page).then(function (photos) {
 				return _this2.setState({ photos: photos.photos.photo });
+			});
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+			var _this3 = this;
+
+			(0, _utils.getPhotos)(this.state.page).then(function (photos) {
+				return _this3.setState({ photos: photos.photos.photo });
 			});
 		}
 	}, {
@@ -9589,7 +9597,7 @@ var Page = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this3 = this;
+			var _this4 = this;
 
 			console.log(this.state.page);
 			return _react2.default.createElement(
@@ -9602,7 +9610,7 @@ var Page = function (_Component) {
 						return _react2.default.createElement(
 							'div',
 							{ key: photo.id, className: 'photo' },
-							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg', onClick: _this3.handlePhotoClick })
+							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg', onClick: _this4.handlePhotoClick })
 						);
 					}) : null,
 					this.state.page > 1 ? _react2.default.createElement(

@@ -18,7 +18,11 @@ export default class Page extends Component {
 	}
 
 	componentDidMount () {
-		if (this.state.page > 1) this.setState({ prevDisplay: 'block' });
+		getPhotos(this.state.page)
+		.then(photos => this.setState({ photos: photos.photos.photo }))
+	}
+
+	componentDidUpdate () {
 		getPhotos(this.state.page)
 		.then(photos => this.setState({ photos: photos.photos.photo }))
 	}
