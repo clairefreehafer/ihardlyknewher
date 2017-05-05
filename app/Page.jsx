@@ -13,7 +13,7 @@ export default class Page extends Component {
 			selectedPhoto: {}
 		};
 
-		// this.handlePhotoClick = this.handlePhotoClick.bind(this);
+		this.closeImage = this.closeImage.bind(this);
 		this.handleNextClick = this.handleNextClick.bind(this);
 		this.handlePreviousClick = this.handlePreviousClick.bind(this);
 	}
@@ -31,6 +31,11 @@ export default class Page extends Component {
 
 	handlePhotoClick (photo, e) {
 		this.setState({ selectedPhoto: photo })
+	}
+
+	closeImage () {
+		this.setState({ selectedPhoto: {} });
+		console.log('test')
 	}
 
 	handleNextClick () {
@@ -64,7 +69,11 @@ export default class Page extends Component {
 				</div>
 
 				{/* selected photo */}
-				<SelectedPhoto metadata={this.state.selectedPhoto} />
+					{Object.keys(this.state.selectedPhoto).length > 0 ?
+						<div onClick={this.closeImage}>
+							<SelectedPhoto metadata={this.state.selectedPhoto} />
+						</div>
+						: null}
 			</div>
 		);
 	}

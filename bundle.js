@@ -9558,7 +9558,7 @@ var Page = function (_Component) {
 			selectedPhoto: {}
 		};
 
-		// this.handlePhotoClick = this.handlePhotoClick.bind(this);
+		_this.closeImage = _this.closeImage.bind(_this);
 		_this.handleNextClick = _this.handleNextClick.bind(_this);
 		_this.handlePreviousClick = _this.handlePreviousClick.bind(_this);
 		return _this;
@@ -9587,6 +9587,12 @@ var Page = function (_Component) {
 		key: 'handlePhotoClick',
 		value: function handlePhotoClick(photo, e) {
 			this.setState({ selectedPhoto: photo });
+		}
+	}, {
+		key: 'closeImage',
+		value: function closeImage() {
+			this.setState({ selectedPhoto: {} });
+			console.log('test');
 		}
 	}, {
 		key: 'handleNextClick',
@@ -9628,7 +9634,11 @@ var Page = function (_Component) {
 						'next \u2192'
 					)
 				),
-				_react2.default.createElement(_SelectedPhoto2.default, { metadata: this.state.selectedPhoto })
+				Object.keys(this.state.selectedPhoto).length > 0 ? _react2.default.createElement(
+					'div',
+					{ onClick: this.closeImage },
+					_react2.default.createElement(_SelectedPhoto2.default, { metadata: this.state.selectedPhoto })
+				) : null
 			);
 		}
 	}]);
@@ -9670,8 +9680,8 @@ var Photo = function Photo(props) {
 
 	return _react2.default.createElement(
 		"div",
-		{ className: "photo" },
-		Object.keys(props.metadata).length > 0 ? _react2.default.createElement("img", { src: "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg" }) : null
+		{ id: "selected-div" },
+		_react2.default.createElement("img", { src: "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg", id: "selected-photo" })
 	);
 };
 
@@ -9710,7 +9720,9 @@ _reactDom2.default.render(_react2.default.createElement(_Page2.default, null), d
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var getPhotos = exports.getPhotos = function getPhotos(page) {
+var getPhotos = exports.getPhotos = function getPhotos() {
+	var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
 	return axios.get('https://api.flickr.com/services/rest/', {
 		params: {
 			method: 'flickr.people.getPublicPhotos',

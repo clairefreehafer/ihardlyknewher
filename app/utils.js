@@ -1,4 +1,4 @@
-export const getPhotos = (page) => {
+export const getPhotos = (page = 1) => {
 	return axios.get('https://api.flickr.com/services/rest/', {
 		params: {
 			method: 'flickr.people.getPublicPhotos',
