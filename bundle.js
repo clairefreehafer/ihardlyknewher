@@ -9599,7 +9599,6 @@ var Page = function (_Component) {
 		value: function render() {
 			var _this4 = this;
 
-			console.log(this.state.page);
 			return _react2.default.createElement(
 				'div',
 				{ id: 'app' },
@@ -9615,7 +9614,7 @@ var Page = function (_Component) {
 					}) : null,
 					this.state.page > 1 ? _react2.default.createElement(
 						'div',
-						{ id: 'previous', style: { display: this.state.prevDisplay }, onClick: this.handlePreviousClick },
+						{ id: 'previous', onClick: this.handlePreviousClick },
 						'\u2190 previous'
 					) : null,
 					_react2.default.createElement(

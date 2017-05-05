@@ -40,7 +40,6 @@ export default class Page extends Component {
 	}
 
 	render () {
-		console.log(this.state.page)
 		return (
 			<div id="app">
 				<div id="photos">
@@ -52,7 +51,8 @@ export default class Page extends Component {
 						)
 					}) : null}
 
-					{this.state.page > 1 ? <div id="previous" style={{ display: this.state.prevDisplay }} onClick={this.handlePreviousClick}>&larr; previous</div> : null}
+					{this.state.page > 1 ? <div id="previous" onClick={this.handlePreviousClick}>&larr; previous</div> : null}
+
 					<div id="next" onClick={this.handleNextClick}>next &rarr;</div>
 				</div>
 			</div>
