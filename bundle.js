@@ -9524,6 +9524,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(50);
@@ -9555,31 +9557,26 @@ var Page = function (_Component) {
 		_this.state = {
 			page: 1,
 			prevDisplay: 'none',
-			photos: []
+			photos: {}
 		};
 		return _this;
 	}
 
 	_createClass(Page, [{
 		key: 'componentWillMount',
-		value: function componentWillMount() {
-			this.setState;
-		}
+		value: function componentWillMount() {}
 	}, {
 		key: 'render',
 		value: function render() {
 			if (this.state.page > 1) this.setState({ prevDisplay: 'inline' });
+			(0, _utils.getPhotos)().then(function (photos) {
+				return console.log(photos);
+			});
 
 			return _react2.default.createElement(
 				'div',
 				{ id: 'photos' },
-				this.state.photos.map(function (photo) {
-					return _react2.default.createElement(
-						'div',
-						{ 'class': 'photo' },
-						'test'
-					);
-				}),
+				_typeof(this.state.photos),
 				_react2.default.createElement(
 					'div',
 					{ id: 'previous', style: { display: this.state.prevDisplay } },
@@ -22127,17 +22124,18 @@ exports.default = Photo;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var getPhotos = exports.getPhotos = function getPhotos() {
-	axios.get('https://api.flickr.com/services/rest/', {
+var getPhotos = exports.getPhotos = function getPhotos(page) {
+	return axios.get('https://api.flickr.com/services/rest/', {
 		params: {
 			method: 'flickr.people.getPhotos',
 			user_id: 'clairefreehafer',
 			api_key: '7358a7e094d78889664b99d33aed9e02',
 			format: 'json',
+			nojsoncallback: '?',
 			per_page: 10
 		}
-	}).then(function (response) {
-		document.getElementById('photo').innerHTML = response.data;
+	}).then(function (res) {
+		return res.data;
 	}).catch(console.error);
 };
 

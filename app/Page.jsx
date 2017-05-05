@@ -10,24 +10,22 @@ export default class Page extends Component {
 		this.state = {
 			page: 1,
 			prevDisplay: 'none',
-			photos: []
+			photos: {}
 		};
 	}
 
 	componentWillMount () {
-		this.setState
+
 	}
 
 	render () {
 		if (this.state.page > 1) this.setState({ prevDisplay: 'inline' });
+		getPhotos()
+		.then(photos => console.log(photos))
 
 		return (
 			<div id="photos">
-				{this.state.photos.map(photo => {
-					return (
-						<div class="photo">test</div>
-					)
-				})}
+				{typeof this.state.photos}
 				<div id="previous" style={{ display: this.state.prevDisplay }}>&larr; previous</div>
 				<div id="next">next &rarr;</div>
 			</div>
