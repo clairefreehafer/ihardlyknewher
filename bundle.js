@@ -9592,7 +9592,6 @@ var Page = function (_Component) {
 		key: 'closeImage',
 		value: function closeImage() {
 			this.setState({ selectedPhoto: {} });
-			console.log('test');
 		}
 	}, {
 		key: 'handleNextClick',
@@ -9612,6 +9611,11 @@ var Page = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ id: 'app' },
+				_react2.default.createElement(
+					'h1',
+					null,
+					'claire\'s flickr feed'
+				),
 				_react2.default.createElement(
 					'div',
 					{ id: 'photos' },

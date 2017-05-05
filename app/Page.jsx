@@ -35,7 +35,6 @@ export default class Page extends Component {
 
 	closeImage () {
 		this.setState({ selectedPhoto: {} });
-		console.log('test')
 	}
 
 	handleNextClick () {
@@ -49,6 +48,7 @@ export default class Page extends Component {
 	render () {
 		return (
 			<div id="app">
+				<h1>claire's flickr feed</h1>
 				<div id="photos">
 
 					{/* render photos */}
