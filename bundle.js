@@ -9554,25 +9554,44 @@ var Page = function (_Component) {
 
 		_this.state = {
 			page: 1,
-			prevDisplay: 'none',
 			photos: []
 		};
+
+		_this.handlePhotoClick = _this.handlePhotoClick.bind(_this);
+		_this.handleNextClick = _this.handleNextClick.bind(_this);
+		_this.handlePreviousClick = _this.handlePreviousClick.bind(_this);
 		return _this;
 	}
 
 	_createClass(Page, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
 			var _this2 = this;
 
-			if (this.state.page > 1) this.setState({ prevDisplay: 'inline' });
-			(0, _utils.getPhotos)().then(function (photos) {
+			if (this.state.page > 1) this.setState({ prevDisplay: 'block' });
+			(0, _utils.getPhotos)(this.state.page).then(function (photos) {
 				return _this2.setState({ photos: photos.photos.photo });
 			});
 		}
 	}, {
+		key: 'handlePhotoClick',
+		value: function handlePhotoClick() {}
+	}, {
+		key: 'handleNextClick',
+		value: function handleNextClick() {
+			this.setState({ page: this.state.page + 1 });
+		}
+	}, {
+		key: 'handlePreviousClick',
+		value: function handlePreviousClick() {
+			this.setState({ page: this.state.page - 1 });
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
+			console.log(this.state.page);
 			return _react2.default.createElement(
 				'div',
 				{ id: 'app' },
@@ -9583,21 +9602,17 @@ var Page = function (_Component) {
 						return _react2.default.createElement(
 							'div',
 							{ key: photo.id, className: 'photo' },
-							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg' })
+							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg', onClick: _this3.handlePhotoClick })
 						);
-					}) : null
-				),
-				_react2.default.createElement(
-					'div',
-					{ id: 'pagnation' },
-					_react2.default.createElement(
+					}) : null,
+					this.state.page > 1 ? _react2.default.createElement(
 						'div',
-						{ id: 'previous', style: { display: this.state.prevDisplay } },
+						{ id: 'previous', style: { display: this.state.prevDisplay }, onClick: this.handlePreviousClick },
 						'\u2190 previous'
-					),
+					) : null,
 					_react2.default.createElement(
 						'div',
-						{ id: 'next' },
+						{ id: 'next', onClick: this.handleNextClick },
 						'next \u2192'
 					)
 				)

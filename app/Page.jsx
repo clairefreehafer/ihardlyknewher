@@ -9,32 +9,47 @@ export default class Page extends Component {
 
 		this.state = {
 			page: 1,
-			prevDisplay: 'none',
 			photos: []
 		};
+
+		this.handlePhotoClick = this.handlePhotoClick.bind(this);
+		this.handleNextClick = this.handleNextClick.bind(this);
+		this.handlePreviousClick = this.handlePreviousClick.bind(this);
 	}
 
-	componentWillMount () {
-		if (this.state.page > 1) this.setState({ prevDisplay: 'inline' });
-		getPhotos()
+	componentDidMount () {
+		if (this.state.page > 1) this.setState({ prevDisplay: 'block' });
+		getPhotos(this.state.page)
 		.then(photos => this.setState({ photos: photos.photos.photo }))
 	}
 
+	handlePhotoClick () {
+
+	}
+
+	handleNextClick () {
+		this.setState({ page: this.state.page + 1 });
+	}
+
+	handlePreviousClick () {
+		this.setState({ page: this.state.page - 1 });
+	}
+
 	render () {
+		console.log(this.state.page)
 		return (
 			<div id="app">
 				<div id="photos">
 					{this.state.photos ? this.state.photos.map(photo => {
 						return (
 							<div key={photo.id} className="photo">
-								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
+								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} onClick={this.handlePhotoClick} />
 							</div>
 						)
 					}) : null}
-				</div>
-				<div id="pagnation">
-					<div id="previous" style={{ display: this.state.prevDisplay }}>&larr; previous</div>
-					<div id="next">next &rarr;</div>
+
+					{this.state.page > 1 ? <div id="previous" style={{ display: this.state.prevDisplay }} onClick={this.handlePreviousClick}>&larr; previous</div> : null}
+					<div id="next" onClick={this.handleNextClick}>next &rarr;</div>
 				</div>
 			</div>
 		);
