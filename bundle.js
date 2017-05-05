@@ -9577,6 +9577,7 @@ var Page = function (_Component) {
 		value: function componentDidUpdate() {
 			var _this3 = this;
 
+			// load new page of photos
 			(0, _utils.getPhotos)(this.state.page).then(function (photos) {
 				return _this3.setState({ photos: photos.photos.photo });
 			});
@@ -9597,8 +9598,6 @@ var Page = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this4 = this;
-
 			return _react2.default.createElement(
 				'div',
 				{ id: 'app' },
@@ -9606,11 +9605,7 @@ var Page = function (_Component) {
 					'div',
 					{ id: 'photos' },
 					this.state.photos ? this.state.photos.map(function (photo) {
-						return _react2.default.createElement(
-							'div',
-							{ key: photo.id, className: 'photo' },
-							_react2.default.createElement('img', { src: 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg', onClick: _this4.handlePhotoClick })
-						);
+						return _react2.default.createElement(_Photo2.default, { key: photo.id, metadata: photo });
 					}) : null,
 					this.state.page > 1 ? _react2.default.createElement(
 						'div',
@@ -22140,10 +22135,12 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Photo = function Photo(props) {
+	var photo = props.metadata;
+
 	return _react2.default.createElement(
-		'div',
-		null,
-		'photo'
+		"div",
+		{ className: "photo" },
+		_react2.default.createElement("img", { src: "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg" })
 	);
 };
 

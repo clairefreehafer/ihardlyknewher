@@ -23,6 +23,7 @@ export default class Page extends Component {
 	}
 
 	componentDidUpdate () {
+		// load new page of photos
 		getPhotos(this.state.page)
 		.then(photos => this.setState({ photos: photos.photos.photo }))
 	}
@@ -43,17 +44,18 @@ export default class Page extends Component {
 		return (
 			<div id="app">
 				<div id="photos">
+
+					{/* render photos */}
 					{this.state.photos ? this.state.photos.map(photo => {
 						return (
-							<div key={photo.id} className="photo">
-								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} onClick={this.handlePhotoClick} />
-							</div>
+							<Photo key={photo.id} metadata={photo} />
 						)
 					}) : null}
 
+					{/* pagination */}
 					{this.state.page > 1 ? <div id="previous" onClick={this.handlePreviousClick}>&larr; previous</div> : null}
-
 					<div id="next" onClick={this.handleNextClick}>next &rarr;</div>
+
 				</div>
 			</div>
 		);
