@@ -20,17 +20,19 @@ export default class Page extends Component {
 
 	componentDidMount () {
 		getPhotos(this.state.page)
-		.then(photos => this.setState({ photos: photos.photos.photo }))
+		.then(photos => this.setState({ photos: photos.photos.photo }));
 	}
 
 	componentDidUpdate () {
 		// load new page of photos
 		getPhotos(this.state.page)
-		.then(photos => this.setState({ photos: photos.photos.photo }))
+		.then(photos => {
+			this.setState({ photos: photos.photos.photo });
+		})
 	}
 
 	handlePhotoClick (photo, e) {
-		this.setState({ selectedPhoto: photo })
+		this.setState({ selectedPhoto: photo });
 	}
 
 	closeImage () {
@@ -56,13 +58,16 @@ export default class Page extends Component {
 						let onPhotoClick = this.handlePhotoClick.bind(this, photo)
 						return (
 							<div key={photo.id} className="photo">
-								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} onClick={onPhotoClick}/>
+								<img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} onClick={onPhotoClick} />
 							</div>
 						)
-					}) : null}
+					}) : <div>Loading...</div>}
 
 					{/* pagination */}
-					{this.state.page > 1 ? <div id="previous" onClick={this.handlePreviousClick}>&larr; previous</div> : null}
+					{this.state.page > 1 ?
+						<div id="previous" onClick={this.handlePreviousClick}>&larr; previous</div>
+					: null}
+
 					<div id="next" onClick={this.handleNextClick}>next &rarr;</div>
 
 

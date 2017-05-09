@@ -11,5 +11,5 @@ export const getPhotos = (page = 1) => {
 		}
 	})
 	.then(res => res.data)
-	.catch(console.error)
+	.catch(console.error);
 }

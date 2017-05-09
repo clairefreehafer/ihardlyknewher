@@ -2,7 +2,7 @@
   "name": "forbes-dev-quiz",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/main.jsx",
   "scripts": {
     "build": "webpack",
     "build-watch": "npm run build -- -w",
